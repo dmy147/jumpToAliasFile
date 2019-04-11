@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 
-const extensions = ['.js', '.ts', '.json', '.jsx', '.tsx', '.vue', '.css', '.mcss', '.scss', '.less', '.html'];
+export const extensions = ['.js', '.ts', '.json', '.jsx', '.tsx', '.vue', '.css', '.mcss', '.scss', '.less', '.html'];
 
 async function readDir(dirPath: string) {
   let result = await new Promise((resolve, reject) => {
@@ -65,7 +65,7 @@ export function extractImportPathFromTextLine(textLine: vscode.TextLine): { path
     execResult = pathReg.exec(textLine.text);
     if (execResult && execResult[1]) {
       const filePath = execResult[1];
-      const filePathIndex = execResult[0].indexOf(filePath);
+      const filePathIndex = execResult[0].lastIndexOf(filePath);
       const start = execResult.index + filePathIndex;
       const end = start + filePath.length;
       return {
@@ -81,4 +81,12 @@ export function getFileZeroLocationFromFilePath(filePath: string) {
   let range = new vscode.Range(0, 0, 0, 0);
   let location = new vscode.Location(uri, range);
   return location;
+}
+
+export const template ={
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {}
+    }
 }

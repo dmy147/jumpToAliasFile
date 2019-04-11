@@ -72,7 +72,9 @@ export default class WebpackAliasSearcher {
         // 修复 create react app 使用 process.cwd() 导致路径获取不正确问题
         // 修复 process.cwd() = projectDir
         process.cwd = () => projectDir;
-        process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+        // process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+        process.env = {...process.env,...{NODE_ENV:"development"}}
+
         const webpackConfig = require(webpackConfigPath);
         if (webpackConfig) {
           webpackConfigs.push(webpackConfig);

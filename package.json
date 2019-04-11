@@ -1,15 +1,15 @@
 {
-  "name": "jump-to-alias-file",
-  "displayName": "Jump To Alias File",
-  "version": "1.0.9",
-  "publisher": "wanfu",
+  "name": "alias-fork",
+  "displayName": "Alias Fork",
+  "version": "0.0.5",
+  "publisher": "dmy147",
   "engines": {
     "vscode": "^1.18.0"
   },
   "icon": "favicon.ico",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wanfu920/jumpToAliasFile"
+    "url": "https://github.com/dmy147/jumpToAliasFile"
   },
   "categories": [
     "Programming Languages"
@@ -23,7 +23,7 @@
   "activationEvents": [
     "*"
   ],
-  "main": "./out/extension",
+  "main": "./out/extension.js",
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
@@ -31,17 +31,24 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "contributes": {
+    "commands": [
+      {
+        "command": "extension.aliasForkBuild",
+        "title": "Webpack Alias Build",
+        "category": "Alias Fork"
+      }
+    ],
     "configuration": {
       "type": "object",
-      "title": "jumpToAliasFile setting",
+      "title": "aliasFork setting",
       "properties": {
-        "jumpToAliasFile.alias": {
+        "aliasFork.alias": {
           "type": "object",
           "default": {},
           "scope": "resource",
           "description": "同 webpack resolve.alias 配置"
         },
-        "jumpToAliasFile.webpeckConfigPath": {
+        "aliasFork.webpeckConfigPath": {
           "type": "string",
           "default": "",
           "scope": "resource",
@@ -52,8 +59,11 @@
   },
   "devDependencies": {
     "@types/node": "^6.0.40",
+    "terser-webpack-plugin": "^1.2.3",
+    "ts-loader": "^5.3.3",
     "tslint": "^5.11.0",
     "typescript": "^2.1.4",
     "vscode": "^1.1.17"
-  }
+  },
+  "dependencies": {}
 }
