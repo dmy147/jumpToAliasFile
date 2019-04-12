@@ -4,7 +4,9 @@ import Configuration from './Configuration';
 import { fixFilePathExtension, extractImportPathFromTextLine, getFileZeroLocationFromFilePath } from './util';
 
 export default class DefinitionProvider implements vscode.DefinitionProvider {
+  private _workspaceDir: string;
   constructor(private readonly _configuration: Configuration) {
+    this._workspaceDir = vscode.workspace.rootPath;
   }
   provideDefinition(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): vscode.ProviderResult<vscode.Definition> {
     return this._getFileRealPosition(document, position);
@@ -22,12 +24,12 @@ export default class DefinitionProvider implements vscode.DefinitionProvider {
 
     let realFilePath: string;
     if (pathObj && pathObj.range.contains(position)) {
-      realFilePath = this._tranformAliasPath(pathObj.path);
+      realFilePath = path.resolve(this._workspaceDir,this._tranformAliasPath(pathObj.path));
 
       // 由于 vscode 不能正确识别 vue 文件的正常导入, 所以此处添加对 vue 文件的正常引入支持
       // 由于 vscode 不能正确识别 less scss sass 文件的导入, 添加支持
       if (!realFilePath && this._needJump(document, pathObj.path)) {
-        realFilePath = path.resolve(document.fileName, '../', pathObj.path);
+        realFilePath = path.resolve(this._workspaceDir,document.fileName, '../', pathObj.path);
       }
     }
 

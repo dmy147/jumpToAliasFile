@@ -1,7 +1,7 @@
 {
   "name": "alias-fork",
   "displayName": "Alias Fork",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "dmy147",
   "engines": {
     "vscode": "^1.18.0"

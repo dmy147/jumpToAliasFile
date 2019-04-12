@@ -11,14 +11,12 @@
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
 			"args": [
-        "/Users/bellcode/Documents/work/cm_teaching_website/",
         "--extensionDevelopmentPath=${workspaceFolder}",
-        // "--extensionTestsPath=${workspaceFolder}/out/test"
 			],
 			"outFiles": [
 				"${workspaceFolder}/out/**/*.js"
       ],
-			"preLaunchTask": "npm: watch"      
+			"preLaunchTask": "npm: watch"
 		}
 	]
 }
